@@ -1,0 +1,430 @@
+/* ======================================================================
+   GR Eletroeletrônica - style.css
+   Comentários detalhados abaixo explicam cada bloco de estilização.
+   Variáveis, layout responsivo, animações e estilo do botão Whatsapp.
+   ====================================================================== */
+
+/* ===========================
+   VARIÁVEIS GLOBAIS
+   Define as cores e padrões reutilizáveis.
+   =========================== */
+:root{
+  --primary: #023b59;           /* Azul petróleo principal */
+  --accent:  #1f8bb3;           /* Azul claro secundário */
+  --bg-gradient: linear-gradient(135deg, var(--primary), var(--accent));
+  --white: #ffffff;
+  --muted: #7b8a95;
+  --radius: 12px;
+  --container-width: 1200px;
+  --gap: 1.25rem;
+  --transition-fast: 200ms ease;
+}
+
+/* ===========================
+   RESET / BASE
+   Fonte, box-sizing, espaçamentos base.
+   =========================== */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body{
+  margin:0;
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #0a2230;
+  background: #f7fbfd;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+}
+
+/* utilitário container para centralizar conteúdo */
+.container{
+  width: min(var(--container-width), 94%);
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+/* ===========================
+   HEADER
+   Barra fixa no topo com logo e navegação.
+   - fundo semi-transparente para efeito sobreposto ao hero
+   - comportamento responsivo: menu hamburger em telas menores
+   =========================== */
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(2,59,89,0.06);
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  gap:var(--gap);
+  justify-content:space-between;
+  padding: 0.6rem 0;
+}
+
+/* Logo */
+.logo img{
+  height:90px;
+  width:auto;
+  display:block;
+}
+
+/* Navegação principal (desktop) */
+.main-nav ul{
+  display:flex;
+  gap:1rem;
+  list-style:none;
+  margin:0;
+  padding:0;
+  align-items:center;
+}
+.main-nav a{
+  text-decoration:none;
+  color: #023b59;
+  font-weight:600;
+  padding:0.5rem 0.6rem;
+  border-radius:8px;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+.main-nav a:hover{ background: rgba(31,139,179,0.08); transform:translateY(-2px); }
+
+/* Botão hamburger (mobile) */
+.nav-toggle{
+  display:none; /* exibido apenas em telas pequenas */
+  background:transparent;
+  border:0;
+  cursor:pointer;
+  padding:0.5rem;
+}
+.hamburger{
+  width:28px;
+  height:2px;
+  background:var(--primary);
+  position:relative;
+  display:block;
+}
+.hamburger::before, .hamburger::after{
+  content:"";
+  position:absolute;
+  left:0;
+  width:28px;
+  height:2px;
+  background:var(--primary);
+  transition: transform 180ms ease;
+}
+.hamburger::before{ transform: translateY(-8px); }
+.hamburger::after{ transform: translateY(8px); }
+
+/* ===========================
+   HERO
+   Seção inicial com gradiente e destaque do nome/slogan.
+   - utiliza variáveis de cor para garantir consistência
+   =========================== */
+.hero{
+  padding: 4rem 0;
+  background: var(--bg-gradient);
+  color: var(--white);
+  border-bottom-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+  box-shadow: 0 6px 30px rgba(1,22,34,0.12);
+}
+.hero-inner{
+  display:grid;
+  grid-template-columns: 1fr 420px;
+  gap:2rem;
+  align-items:center;
+}
+
+/* Texto do hero */
+.brand{
+  margin:0 0 0.6rem 0;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height:1.04;
+  font-weight:700;
+
+  /* efeito de texto com gradiente invertido (para destaque) */
+  background: linear-gradient(90deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.slogan{
+  margin:0 0 1rem 0;
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.95);
+  max-width: 48ch;
+}
+
+/* CTAs do hero */
+.hero-cta{ display:flex; gap: 0.75rem; margin-top:1rem; }
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:0.6rem;
+  border-radius: 12px;
+  padding: 0.7rem 1rem;
+  text-decoration:none;
+  font-weight:600;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+.btn:active{ transform: translateY(1px); }
+
+/* Botão primário com gradiente */
+.btn-primary{
+  color:var(--white);
+  background: var(--bg-gradient);
+  box-shadow: 0 6px 20px rgba(31,139,179,0.18);
+}
+
+/* Botão secundário outline */
+.btn-outline{
+  color:var(--white);
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.24);
+}
+
+/* Visual ao lado do hero (imagem placeholder) */
+.placeholder-visual{
+  height:240px;
+  border-radius:18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.06));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color: rgba(255,255,255,0.75);
+  font-weight:600;
+}
+
+/* ===========================
+   SECTION (geral)
+   Estilos comuns a cada seção: espaçamento, títulos e subtítulos.
+   =========================== */
+.section{
+  padding: 3rem 0;
+  background: transparent;
+}
+.section-title{
+  margin:0 0 0.5rem 0;
+  font-size: 1.4rem;
+  color: var(--primary);
+}
+.section-sub{
+  margin:0 0 1.5rem 0;
+  color: var(--muted);
+}
+
+/* ===========================
+   SERVIÇOS - GRID DE CARDS
+   Cards simples, responsivos e com sombra suave.
+   =========================== */
+.services-grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:1rem;
+  margin-top:1rem;
+}
+.service-card{
+  background:#fff;
+  padding:1rem;
+  border-radius:12px;
+  box-shadow: 0 8px 20px rgba(2,59,89,0.05);
+  border-left: 4px solid var(--accent);
+}
+.service-card h3{ margin:0 0 0.4rem 0; font-size:1rem; color:var(--primary); }
+.service-card p{ margin:0; color:#334a54; font-size:0.95rem; }
+
+/* ===========================
+   CONSULTORIA (sobre) - estilo simples
+   =========================== */
+.consultoria p{ max-width: 70ch; color:#334a54; }
+
+/* ===========================
+   TESTIMONIALS
+   Slider simples: apenas um depoimento visível por vez.
+   =========================== */
+.testimonials-wrap{
+  display:flex;
+  gap:1rem;
+  align-items:center;
+}
+.testi-slider{ flex:1; position:relative; overflow:hidden; min-height:110px; }
+.testi{
+  position:absolute;
+  top:0; left:0; width:100%;
+  opacity:0;
+  transform: translateY(8px);
+  transition: opacity 280ms ease, transform 280ms ease;
+  background:#fff;
+  padding:1rem;
+  border-radius:12px;
+  box-shadow: 0 6px 18px rgba(2,59,89,0.05);
+}
+.testi.active{ opacity:1; transform: translateY(0); }
+.testi p{ margin:0 0 0.6rem 0; color:#0b2a33; }
+.testi cite{ color:var(--muted); font-size:0.9rem; }
+
+/* botões do slider */
+.testi-prev, .testi-next{
+  background:var(--accent);
+  color:var(--white);
+  border:0;
+  padding:0.4rem 0.6rem;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:1.2rem;
+}
+
+/* ===========================
+   PROJETOS - GRID
+   Itens placeholders que podem receber imagens.
+   =========================== */
+.projects-grid{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap:1rem;
+  margin-top:1rem;
+}
+.project-item{
+  background:#fff;
+  border-radius:12px;
+  min-height:120px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--muted);
+  box-shadow: 0 6px 18px rgba(2,59,89,0.04);
+}
+
+/* ===========================
+   CONTATO / ENDEREÇO
+   Informações de contato diretas, sem formulário.
+   =========================== */
+.contact p a{ color:var(--primary); font-weight:600; text-decoration:none; }
+.address p{ color:#334a54; }
+
+/* ===========================
+   RODAPÉ
+   =========================== */
+.site-footer{
+  background:#01222e;
+  color:#dff6ff;
+  padding:1.25rem 0;
+  margin-top:2rem;
+}
+.footer-inner{ display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+
+/* ===========================
+   BOTÃO WHATSAPP FLUTUANTE
+   - posicionamento: canto inferior direito
+   - animação: pulso (anel) + leve elevação
+   - tooltip que aparece com fade quando ativado por JS
+   =========================== */
+.whatsapp-btn{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  width:62px;
+  height:62px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:120;
+  text-decoration:none;
+  background: linear-gradient(180deg, var(--accent), var(--primary));
+  box-shadow: 0 10px 30px rgba(2,59,89,0.22);
+  transform:translateZ(0);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+  color: #fff;
+  isolation:isolate;
+}
+
+
+
+/* Anel pulsante decorativo (posição absoluta dentro do botão) */
+.whatsapp-ring{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:62px;
+  height:62px;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+  z-index:0;
+  /* a animação do ring é controlada apenas via CSS para efeito contínuo */
+  animation: ring 2000ms infinite;
+  /* cor semitransparente baseada no accent */
+  background: radial-gradient(circle at center, rgba(31,139,179,0.22), rgba(2,59,89,0.06) 60%, transparent 60%);
+}
+
+/* Animação principal do anel (expansão sutil) */
+@keyframes ring{
+  0%{ transform: translate(-50%,-50%) scale(0.9); opacity:0.9; }
+  60%{ transform: translate(-50%,-50%) scale(1.18); opacity:0.45; }
+  100%{ transform: translate(-50%,-50%) scale(0.9); opacity:0.0; }
+}
+
+/* Leve pulso de escala no botão principal para atrair atenção */
+.whatsapp-btn img {
+  width: 28px;       /* tamanho do ícone */
+  height: 28px;
+  object-fit: contain;
+  z-index: 2;        /* mantém acima do efeito pulsante */
+}
+
+
+/* Tooltip oculto por padrão, exibido via JS ao redor do botão */
+.whatsapp-tooltip{
+  position:absolute;
+  right:72px;
+  bottom:10px;
+  background:#fff;
+  color:var(--primary);
+  padding:0.45rem 0.6rem;
+  border-radius:8px;
+  box-shadow: 0 8px 24px rgba(2,59,89,0.12);
+  font-weight:600;
+  font-size:0.9rem;
+  opacity:0;
+  transform: translateY(6px);
+  transition: opacity 220ms ease, transform 220ms ease;
+  pointer-events:none;
+  white-space:nowrap;
+  z-index:200;
+}
+
+/* classe que o JS aplica para tornar o tooltip visível */
+.whatsapp-tooltip.visible{
+  opacity:1;
+  transform: translateY(0);
+}
+
+/* ===========================
+   RESPONSIVIDADE
+   - adapta grid e navegação em telas pequenas
+   =========================== */
+@media (max-width: 980px){
+  .hero-inner{ grid-template-columns: 1fr; text-align:center; }
+  .placeholder-visual{ margin-top:1.25rem; }
+
+  .services-grid{ grid-template-columns: repeat(2, 1fr); }
+  .projects-grid{ grid-template-columns: repeat(2, 1fr); }
+
+  .nav-toggle{ display:block; }
+  .main-nav{ display:none; position:absolute; top:72px; right:20px; background:#fff; width:260px; border-radius:12px; box-shadow: 0 12px 40px rgba(2,59,89,0.12); overflow:hidden; }
+  .main-nav ul{ flex-direction:column; padding:0.5rem; }
+  .main-nav a{ color:#023b59; display:block; padding:0.8rem 0.9rem; }
+  .main-nav.open{ display:block; }
+}
+
+/* telas muito pequenas */
+@media (max-width: 520px){
+  .services-grid{ grid-template-columns: 1fr; }
+  .projects-grid{ grid-template-columns: 1fr; }
+  .hero{ padding: 2.5rem 0; }
+  .whatsapp-tooltip{ display:none; } /* tooltip pode atrapalhar em telas muito pequenas */
+}
