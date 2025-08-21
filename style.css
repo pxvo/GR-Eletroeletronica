@@ -278,25 +278,41 @@ body{
 }
 
 /* ===========================
-   PROJETOS - GRID
-   Itens placeholders que podem receber imagens.
+   PROJETOS - GRID COM IMAGENS
    =========================== */
-.projects-grid{
-  display:grid;
+.projects-grid {
+  display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap:1rem;
-  margin-top:1rem;
+  gap: 1rem;
+  margin-top: 1rem;
 }
-.project-item{
-  background:#fff;
-  border-radius:12px;
-  min-height:120px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--muted);
-  box-shadow: 0 6px 18px rgba(2,59,89,0.04);
+
+.project-item {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden; /* garante que a imagem arredonde junto */
+  box-shadow: 0 6px 18px rgba(2,59,89,0.08);
+  text-align: center;
 }
+
+.project-item img,
+.project-item video {
+  width: 100%;
+  height: 250px;     /* altura fixa para padronizar todos os cards */
+  object-fit: cover; /* corta proporcionalmente sem distorcer */
+  display: block;
+  border: none;
+}
+
+
+.project-item .caption {
+  padding: 0.6rem;
+  font-size: 0.95rem;
+  color: var(--primary);
+  font-weight: 600;
+  background: #f7fbfd;
+}
+
 
 /* ===========================
    CONTATO / ENDEREÇO
